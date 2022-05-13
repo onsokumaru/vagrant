@@ -1,0 +1,7 @@
+# ssh config
+Host github.com
+    Hostname github.com
+    User git
+    AddKeysToAgent yes
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/ansible_ed25519

@@ -1,0 +1,7 @@
+# repo .gitignore file
+
+*.swp
+ansible_testing/global_config_files/ssh/ansible/id_ed25519
+ansible_testing/global_config_files/ssh/vagrant/id_ed25519
+ansible_testing/ubuntu_01/.vagrant/*
+
