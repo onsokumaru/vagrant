@@ -39,6 +39,9 @@ Vagrant.configure("2") do |config|
   # your network.
   # config.vm.network "public_network"
 
+  # create bridged network
+  config.vm.network "public_network", bridge: "wlp3s0"
+
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
@@ -68,14 +71,11 @@ Vagrant.configure("2") do |config|
     apt-get install -y git 
     apt-get install -y ansible
   SHELL
-  config.vm.provision "file", source: "/home/mike/.ssh/ansible-pull/ansible_ed25519", destination: "/home/vagrant/.ssh/ansible_ed25519"
-#  config.vm.provision "shell" do |s|
-#    ssh_pub_key = File.readlines("/home/mike/.ssh/vagrant/vagrant_ed.pub").first.strip
-#    ssh_ansible_pri_key = File.readlines("/home/mike/.ssh/ansible-pull/ansible_ed25519").first.strip
-#    s.inline = <<-SHELL
-#    echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
-#    echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
-#    echo #{ssh_ansible_pri_key} >> /home/vagrant/.ssh/ansible_ed25519
-#    SHELL
-#  end
+  config.vm.provision "shell" do |s|
+    ssh_pub_key = File.readlines("/home/mike/.ssh/vagrant/vagrant_ed.pub").first.strip
+    s.inline = <<-SHELL
+    echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys
+    echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+    SHELL
+  end
 end
